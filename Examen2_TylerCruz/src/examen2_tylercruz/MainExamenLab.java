@@ -12,7 +12,11 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
 
 /**
  *
@@ -90,9 +94,10 @@ public class MainExamenLab extends javax.swing.JFrame {
         JT_UserToSend = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         JB_ListRequests = new javax.swing.JButton();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jTree1 = new javax.swing.JTree();
         CB_Requests = new javax.swing.JComboBox<>();
+        jPanel4 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        JTree_Receptores = new javax.swing.JTree();
         MainMenuBar = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         JMI_Login = new javax.swing.JMenuItem();
@@ -367,7 +372,7 @@ public class MainExamenLab extends javax.swing.JFrame {
                     .addComponent(JSpinner_WifiQuality, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(JB_CreateUsuario)
-                .addContainerGap(513, Short.MAX_VALUE))
+                .addContainerGap(138, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Create/Remove", jPanel1);
@@ -432,8 +437,6 @@ public class MainExamenLab extends javax.swing.JFrame {
             }
         });
 
-        jScrollPane3.setViewportView(jTree1);
-
         CB_Requests.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 CB_RequestsMouseClicked(evt);
@@ -446,9 +449,7 @@ public class MainExamenLab extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jScrollPane3)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(JB_ListFriends)
@@ -476,12 +477,33 @@ public class MainExamenLab extends javax.swing.JFrame {
                             .addComponent(JB_ListRequests))
                         .addGap(5, 5, 5)
                         .addComponent(CB_Requests, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(61, Short.MAX_VALUE))
+                .addContainerGap(67, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Friends", jPanel2);
+
+        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Receptores");
+        JTree_Receptores.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        jScrollPane2.setViewportView(JTree_Receptores);
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(501, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(63, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("JTree", jPanel4);
 
         javax.swing.GroupLayout MainPanelLayout = new javax.swing.GroupLayout(MainPanel);
         MainPanel.setLayout(MainPanelLayout);
@@ -496,8 +518,8 @@ public class MainExamenLab extends javax.swing.JFrame {
             MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(MainPanelLayout.createSequentialGroup()
                 .addGap(17, 17, 17)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 813, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(56, Short.MAX_VALUE))
         );
 
         jMenu1.setText("Home");
@@ -530,7 +552,7 @@ public class MainExamenLab extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(MainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 19, Short.MAX_VALUE))
         );
 
         pack();
@@ -548,20 +570,20 @@ public class MainExamenLab extends javax.swing.JFrame {
         // TODO add your handling code here:
         //String username, String password, int wifiquality
         int quality = Integer.parseInt(this.JSpinner_WifiQuality.getValue().toString());
-        Usuarios x = new Usuarios(this.JT_Usuario_Create.getText(),this.JT_Password_Create.getText(),quality,this.JT_Nombre_Create.getText(),
-        this.JT_Apellido_Create.getText(),this.JT_Telefono_Create.getText());
+        Usuarios x = new Usuarios(this.JT_Usuario_Create.getText(), this.JT_Password_Create.getText(), quality, this.JT_Nombre_Create.getText(),
+                this.JT_Apellido_Create.getText(), this.JT_Telefono_Create.getText());
         archivo = new File("./Usuarios");
         LoadFile();
         listaUsuarios.add(x);
         writeFile();
-        
+
     }//GEN-LAST:event_JB_CreateUsuarioActionPerformed
 
     private void JB_RegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JB_RegistrarActionPerformed
         // TODO add your handling code here:
         int quality = Integer.parseInt(this.JSpinner_WifiQuality_Registrar.getValue().toString());
-        Usuarios x = new Usuarios(this.JT_Usuario_Registrar.getText(),this.JT_Password_Registrar.getText(),quality,this.JT_Nombre_Registrar.getText(),
-        this.JT_Apellido_Registrar.getText(),this.JT_Telefono_Registrar.getText());
+        Usuarios x = new Usuarios(this.JT_Usuario_Registrar.getText(), this.JT_Password_Registrar.getText(), quality, this.JT_Nombre_Registrar.getText(),
+                this.JT_Apellido_Registrar.getText(), this.JT_Telefono_Registrar.getText());
         archivo = new File("./Usuarios");
         LoadFile();
         listaUsuarios.add(x);
@@ -577,7 +599,7 @@ public class MainExamenLab extends javax.swing.JFrame {
             listaUsuarios.get(i).getUsername().equals(loggedIn);
             numberLoggedIn = i;
         }
-         DefaultListModel modelo
+        DefaultListModel modelo
                 = (DefaultListModel) JList_Friends.getModel();
         for (int i = 0; i < listaUsuarios.get(numberLoggedIn).getListamigos().size(); i++) {
             modelo.addElement(listaUsuarios.get(numberLoggedIn).getListamigos().get(i));
@@ -608,17 +630,16 @@ public class MainExamenLab extends javax.swing.JFrame {
             if (listaUsuarios.get(i).getUsername().equals(ToSolicitud)) {
                 listaUsuarios.get(i).setListsolicitudes(listaUsuarios.get(numberLoggedIn));
             }
-            
+
         }
-        
+
     }//GEN-LAST:event_JB_SendSolicitudActionPerformed
 
     private void JB_ListRequestsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JB_ListRequestsActionPerformed
         // TODO add your handling code here:
         archivo = new File("./Usuarios");
         LoadFile();
-        DefaultListModel modelo
-                = (DefaultListModel) CB_Requests.getModel();
+        DefaultComboBoxModel modelo = (DefaultComboBoxModel) CB_Requests.getModel();
         for (int i = 0; i < listaUsuarios.get(numberLoggedIn).getListsolicitudes().size(); i++) {
             modelo.addElement(listaUsuarios.get(numberLoggedIn).getListsolicitudes().get(i));
         }
@@ -637,10 +658,10 @@ public class MainExamenLab extends javax.swing.JFrame {
     private void CB_RequestsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CB_RequestsMouseClicked
         // TODO add your handling code here:
         if (evt.isMetaDown()) {
-                FriendRequestMenu.show(evt.getComponent(),
-                        evt.getX(), evt.getY());
+            FriendRequestMenu.show(evt.getComponent(),
+                    evt.getX(), evt.getY());
 
-            }
+        }
     }//GEN-LAST:event_CB_RequestsMouseClicked
 
     private void JList_FriendsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JList_FriendsMouseClicked
@@ -651,12 +672,67 @@ public class MainExamenLab extends javax.swing.JFrame {
                         evt.getX(), evt.getY());
 
             }
+        } else {
+            JOptionPane.showMessageDialog(this,
+                    "No hay persona seleccionada");
         }
     }//GEN-LAST:event_JList_FriendsMouseClicked
 
     private void JMI_SendMessageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMI_SendMessageActionPerformed
         // TODO add your handling code here:
-        
+        DefaultTreeModel modeloARBOL
+                = (DefaultTreeModel) JTree_Receptores.getModel();
+        DefaultMutableTreeNode raiz
+                = (DefaultMutableTreeNode) modeloARBOL.getRoot();
+        DefaultListModel modeloLISTA
+                = (DefaultListModel) JList_Friends.getModel();
+        int wifiquality;
+        String username, password, nombre, apellido, numeroCel;
+        username
+                = ((Usuarios) modeloLISTA.get(
+                        JList_Friends.getSelectedIndex())).getUsername();
+        password
+                = ((Usuarios) modeloLISTA.get(
+                        JList_Friends.getSelectedIndex())).getPassword();
+        nombre
+                = ((Usuarios) modeloLISTA.get(
+                        JList_Friends.getSelectedIndex())).getNombre();
+        apellido
+                = ((Usuarios) modeloLISTA.get(
+                        JList_Friends.getSelectedIndex())).getApellido();
+        numeroCel
+                = ((Usuarios) modeloLISTA.get(
+                        JList_Friends.getSelectedIndex())).getNumeroCel();
+        wifiquality
+                = ((Usuarios) modeloLISTA.get(
+                        JList_Friends.getSelectedIndex())).getWifiquality();
+        //String username, String password, int wifiquality, String nombre, String apellido, String numeroCel
+        int centinela = -1;
+        for (int i = 0; i < raiz.getChildCount(); i++) {
+            if (raiz.getChildAt(i).toString().
+                    equals(username)) {
+                DefaultMutableTreeNode p
+                        = new DefaultMutableTreeNode(
+                                new Usuarios(username, password, wifiquality, nombre, apellido, numeroCel)
+                        );
+                ((DefaultMutableTreeNode) raiz.getChildAt(i)).add(p);
+                centinela = 1;
+            } //fin if
+        } //fin for  
+
+        if (centinela == -1) {
+            DefaultMutableTreeNode n
+                    = new DefaultMutableTreeNode(username);
+            DefaultMutableTreeNode p
+                    = new DefaultMutableTreeNode(
+                            new Usuarios(username, password, wifiquality, nombre, apellido, numeroCel)
+                    );
+            n.add(p);
+            raiz.add(n);
+        }  // fin if          
+        modeloARBOL.reload();
+
+
     }//GEN-LAST:event_JMI_SendMessageActionPerformed
 
     /**
@@ -693,7 +769,7 @@ public class MainExamenLab extends javax.swing.JFrame {
             }
         });
     }
-    
+
     public void writeFile() {
         FileOutputStream fw = null;
         ObjectOutputStream bw = null;
@@ -716,7 +792,7 @@ public class MainExamenLab extends javax.swing.JFrame {
             }
         }
     }
-    
+
     public void LoadFile() {
         try {
             listaUsuarios = new ArrayList();
@@ -741,7 +817,7 @@ public class MainExamenLab extends javax.swing.JFrame {
             ex.printStackTrace();
         }
     }
-    
+
     int numberLoggedIn = 0;
     String loggedIn = "";
     File archivo = null;
@@ -779,6 +855,7 @@ public class MainExamenLab extends javax.swing.JFrame {
     private javax.swing.JTextField JT_UserToSend;
     private javax.swing.JTextField JT_Usuario_Create;
     private javax.swing.JTextField JT_Usuario_Registrar;
+    private javax.swing.JTree JTree_Receptores;
     private javax.swing.JMenuBar MainMenuBar;
     private javax.swing.JPanel MainPanel;
     private javax.swing.JPanel MainPanel_Login;
@@ -805,10 +882,10 @@ public class MainExamenLab extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTree jTree1;
     // End of variables declaration//GEN-END:variables
 }

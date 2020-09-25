@@ -38,7 +38,7 @@ public abstract class Persona {
         this.numeroCel = numeroCel;
     }
     
-    public void Enviar(){};
+    public abstract void Enviar();
 
     @Override
     public String toString() {
