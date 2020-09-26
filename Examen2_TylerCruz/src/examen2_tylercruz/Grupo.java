@@ -6,7 +6,6 @@ public class Grupo extends Chats{
     private String chatName;
     private ArrayList <Usuarios> listMiembros = new ArrayList();
     private Usuarios admin;
-    private ArrayList <Mensaje> listmsg = new ArrayList();
 
     public Grupo() {
     }
@@ -41,25 +40,16 @@ public class Grupo extends Chats{
         this.admin = admin;
     }
 
-    public ArrayList<Mensaje> getListmsg() {
-        return listmsg;
-    }
-
-    public void setListmsg(ArrayList<Mensaje> listmsg) {
-        this.listmsg = listmsg;
-    }
-    
     public void setListMiembros(Usuarios u){
         listMiembros.add(u);
     }
-    
-    public void setListmsg(Mensaje m){
-        listmsg.add(m);
-    }
+
     @Override
     public String toString() {
-        return "Grupo{" + "chatName=" + chatName + ", listMiembros=" + listMiembros + ", admin=" + admin + ", listmsg=" + listmsg + '}';
+        return "Grupo{" + "chatName=" + chatName + ", listMiembros=" + listMiembros + ", admin=" + admin + '}';
     }
+    
+    
     
     
     
