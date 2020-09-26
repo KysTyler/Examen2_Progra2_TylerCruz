@@ -1,10 +1,12 @@
 package examen2_tylercruz;
 
-public abstract class Persona {
+import java.io.Serializable;
+
+public abstract class Persona implements Serializable{
     private String nombre;
     private String apellido;
     private String numeroCel;
-
+private static final long SerialVersionUID=103L;
     public Persona() {
     }
 
@@ -38,7 +40,7 @@ public abstract class Persona {
         this.numeroCel = numeroCel;
     }
     
-    public abstract void Enviar();
+    public abstract int Enviar(int calidad);
 
     @Override
     public String toString() {

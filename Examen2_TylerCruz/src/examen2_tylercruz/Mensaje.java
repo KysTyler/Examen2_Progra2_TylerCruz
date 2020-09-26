@@ -1,12 +1,14 @@
 package examen2_tylercruz;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Mensaje {
+public class Mensaje implements Serializable{
     private String cotenido;
     private Date hora;
     private Date date;
     private boolean seen;
+    private static final long SerialVersionUID=102L;
 
     public Mensaje() {
     }

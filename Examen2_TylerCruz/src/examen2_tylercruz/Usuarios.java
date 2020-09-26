@@ -1,14 +1,16 @@
 package examen2_tylercruz;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Usuarios extends Persona{
+public class Usuarios extends Persona implements Serializable{
     private String username;
     private String password;
     private ArrayList <Chats> listchat =  new ArrayList();
     private ArrayList <Usuarios> listamigos = new ArrayList();
     private ArrayList <Usuarios> listsolicitudes = new ArrayList();
     private int wifiquality;
+    private static final long SerialVersionUID=106L;
 
     public Usuarios() {
     }
@@ -78,14 +80,16 @@ public class Usuarios extends Persona{
     }
     
     @Override
-    public void Enviar(){
-        
+    public int Enviar(int calidad){
+        return ((int) ((calidad * 0.6) + (this.wifiquality * 0.9)));
     }
 
     @Override
     public String toString() {
-        return "Usuarios{" + "username=" + username + ", password=" + password + ", listchat=" + listchat + ", listamigos=" + listamigos + ", wifiquality=" + wifiquality + '}';
+        return "Usuarios{" + "username=" + username + ", password=" + password + ", listchat=" + listchat + ", listamigos=" + listamigos + ", listsolicitudes=" + listsolicitudes + ", wifiquality=" + wifiquality + '}';
     }
+
+    
     
     
     

@@ -1,9 +1,11 @@
 package examen2_tylercruz;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Privado extends Chats{
+public class Privado extends Chats implements Serializable{
     private Usuarios usuario;
+    private static final long SerialVersionUID=104L;
 
     public Privado() {
     }

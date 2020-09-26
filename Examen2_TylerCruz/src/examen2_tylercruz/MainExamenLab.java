@@ -29,6 +29,9 @@ public class MainExamenLab extends javax.swing.JFrame {
      */
     public MainExamenLab() {
         initComponents();
+        MAINTAB.setEnabled(false);
+        JB_CreateUsuario.setEnabled(false);
+        JB_Delete_Create.setEnabled(false);
     }
 
     /**
@@ -83,7 +86,7 @@ public class MainExamenLab extends javax.swing.JFrame {
         TextArea_Mensaje = new javax.swing.JTextArea();
         jButton1 = new javax.swing.JButton();
         MainPanel = new javax.swing.JPanel();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        MAINTAB = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         JT_Usuario_Create = new javax.swing.JTextField();
@@ -98,6 +101,7 @@ public class MainExamenLab extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         JT_Apellido_Create = new javax.swing.JTextField();
         JT_Telefono_Create = new javax.swing.JTextField();
+        JB_Delete_Create = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         JTree_Receptores = new javax.swing.JTree();
@@ -116,6 +120,7 @@ public class MainExamenLab extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         JB_ListRequests = new javax.swing.JButton();
         CB_Requests = new javax.swing.JComboBox<>();
+        jProgressBar1 = new javax.swing.JProgressBar();
         MainMenuBar = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         JMI_Login = new javax.swing.JMenuItem();
@@ -346,6 +351,11 @@ public class MainExamenLab extends javax.swing.JFrame {
         );
 
         JMI_SeeChat.setText("See Chat");
+        JMI_SeeChat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JMI_SeeChatActionPerformed(evt);
+            }
+        });
         SeeMessageMenu.add(JMI_SeeChat);
 
         jLabel20.setText("Mensaje");
@@ -424,6 +434,13 @@ public class MainExamenLab extends javax.swing.JFrame {
 
         jLabel12.setText("Numero Telefono:");
 
+        JB_Delete_Create.setText("Delete Account");
+        JB_Delete_Create.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JB_Delete_CreateActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -431,7 +448,6 @@ public class MainExamenLab extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(JB_CreateUsuario)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -456,7 +472,11 @@ public class MainExamenLab extends javax.swing.JFrame {
                                 .addComponent(JT_Usuario_Create)
                                 .addComponent(JT_Nombre_Create)
                                 .addComponent(JT_Apellido_Create)
-                                .addComponent(JT_Telefono_Create)))))
+                                .addComponent(JT_Telefono_Create))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(JB_CreateUsuario)
+                        .addGap(18, 18, 18)
+                        .addComponent(JB_Delete_Create)))
                 .addContainerGap(420, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -486,12 +506,14 @@ public class MainExamenLab extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(JSpinner_WifiQuality, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(JB_CreateUsuario)
-                .addContainerGap(138, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(JB_CreateUsuario)
+                    .addComponent(JB_Delete_Create))
+                .addContainerGap(126, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Create/Remove", jPanel1);
+        MAINTAB.addTab("Create/Remove", jPanel1);
 
         javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Receptores");
         JTree_Receptores.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
@@ -519,7 +541,7 @@ public class MainExamenLab extends javax.swing.JFrame {
                 .addContainerGap(63, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("JTree", jPanel4);
+        MAINTAB.addTab("JTree", jPanel4);
 
         jLabel10.setText("Enter group name: ");
 
@@ -555,7 +577,7 @@ public class MainExamenLab extends javax.swing.JFrame {
                 .addContainerGap(319, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Create Groups", jPanel6);
+        MAINTAB.addTab("Create Groups", jPanel6);
 
         JList_Friends.setModel(new DefaultListModel());
         JList_Friends.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -634,18 +656,20 @@ public class MainExamenLab extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(JB_ListFriends)
                     .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel9)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(JB_ListRequests))
-                    .addComponent(CB_Requests, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(CB_Requests, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                            .addComponent(jLabel9)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(JB_ListRequests))))
                 .addContainerGap(89, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(JB_ListFriends)
@@ -656,11 +680,13 @@ public class MainExamenLab extends javax.swing.JFrame {
                             .addComponent(jLabel9)
                             .addComponent(JB_ListRequests))
                         .addGap(5, 5, 5)
-                        .addComponent(CB_Requests, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(CB_Requests, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(67, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Friends", jPanel2);
+        MAINTAB.addTab("Friends", jPanel2);
 
         javax.swing.GroupLayout MainPanelLayout = new javax.swing.GroupLayout(MainPanel);
         MainPanel.setLayout(MainPanelLayout);
@@ -668,14 +694,14 @@ public class MainExamenLab extends javax.swing.JFrame {
             MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(MainPanelLayout.createSequentialGroup()
                 .addGap(28, 28, 28)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 744, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(MAINTAB, javax.swing.GroupLayout.PREFERRED_SIZE, 744, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(47, Short.MAX_VALUE))
         );
         MainPanelLayout.setVerticalGroup(
             MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(MainPanelLayout.createSequentialGroup()
                 .addGap(17, 17, 17)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(MAINTAB, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(56, Short.MAX_VALUE))
         );
 
@@ -690,6 +716,11 @@ public class MainExamenLab extends javax.swing.JFrame {
         jMenu1.add(JMI_Login);
 
         JMI_Registrar.setText("Registrar");
+        JMI_Registrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JMI_RegistrarActionPerformed(evt);
+            }
+        });
         jMenu1.add(JMI_Registrar);
 
         MainMenuBar.add(jMenu1);
@@ -721,6 +752,7 @@ public class MainExamenLab extends javax.swing.JFrame {
         JD_Login.pack();
         JD_Login.setLocationRelativeTo(this);
         JD_Login.setVisible(true);
+
     }//GEN-LAST:event_JMI_LoginActionPerformed
 
     private void JB_CreateUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JB_CreateUsuarioActionPerformed
@@ -733,6 +765,7 @@ public class MainExamenLab extends javax.swing.JFrame {
         LoadFile();
         listaUsuarios.add(x);
         writeFile();
+        JOptionPane.showMessageDialog(null, "Created Sucessfully!");
 
     }//GEN-LAST:event_JB_CreateUsuarioActionPerformed
 
@@ -745,6 +778,7 @@ public class MainExamenLab extends javax.swing.JFrame {
         LoadFile();
         listaUsuarios.add(x);
         writeFile();
+        JOptionPane.showMessageDialog(null, "Created Sucessfully!");
     }//GEN-LAST:event_JB_RegistrarActionPerformed
 
     private void JB_ListFriendsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JB_ListFriendsActionPerformed
@@ -772,6 +806,9 @@ public class MainExamenLab extends javax.swing.JFrame {
             if (listaUsuarios.get(i).getUsername().equals(JT_UserName_Login.getText())
                     && listaUsuarios.get(i).getPassword().equals(JT_Password_Login.getText())) {
                 loggedIn = JT_UserName_Login.getText();
+                MAINTAB.setEnabled(true);
+                JB_CreateUsuario.setEnabled(true);
+                JB_Delete_Create.setEnabled(true);
             }
 
         }
@@ -780,16 +817,18 @@ public class MainExamenLab extends javax.swing.JFrame {
     private void JB_SendSolicitudActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JB_SendSolicitudActionPerformed
         // TODO add your handling code here:
         //String sender, Usuarios user
-        String ToSolicitud = this.JT_UserToSend.getText();
+        ToSolicitud = this.JT_UserToSend.getText();
         archivo = new File("./Usuarios");
         LoadFile();
+        System.out.println("USuarios" + listaUsuarios.size());
         //Solicitud x = new Solicitud(loggedIn,listaUsuarios.get(numberLoggedIn));
         for (int i = 0; i < listaUsuarios.size(); i++) {
             if (listaUsuarios.get(i).getUsername().equals(ToSolicitud)) {
+                System.out.println("INSIDE IF TO  SEND SOlicitud");
                 listaUsuarios.get(i).setListsolicitudes(listaUsuarios.get(numberLoggedIn));
             }
-
         }
+        JOptionPane.showMessageDialog(null, "Sent Sucessfully!");
 
     }//GEN-LAST:event_JB_SendSolicitudActionPerformed
 
@@ -797,19 +836,24 @@ public class MainExamenLab extends javax.swing.JFrame {
         // TODO add your handling code here:
         archivo = new File("./Usuarios");
         LoadFile();
+        System.out.println("Number logged in: " + numberLoggedIn);
+        System.out.println(listaUsuarios.get(numberLoggedIn));
         DefaultComboBoxModel modelo = (DefaultComboBoxModel) CB_Requests.getModel();
         for (int i = 0; i < listaUsuarios.get(numberLoggedIn).getListsolicitudes().size(); i++) {
             modelo.addElement(listaUsuarios.get(numberLoggedIn).getListsolicitudes().get(i));
         }
+        CB_Requests.setModel(modelo);
     }//GEN-LAST:event_JB_ListRequestsActionPerformed
 
     private void JMI_AcceptFriendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMI_AcceptFriendActionPerformed
         // TODO add your handling code here:
         //int JListRequest = JList_Requests.getSelectedIndex();
         archivo = new File("./Usuarios");
-//        for (int i = 0; i < listaUsuarios.size(); i++) {
-//            listaUsuarios.get(i).setListamigos()
-//        }
+        for (int i = 0; i < listaUsuarios.size(); i++) {
+            if (listaUsuarios.get(i).getUsername().equals(ToSolicitud)) {
+                listaUsuarios.get(i).setListamigos(listaUsuarios.get(numberLoggedIn));
+            }
+        }
         listaUsuarios.get(numberLoggedIn).setListamigos((Usuarios) CB_Requests.getSelectedItem());
     }//GEN-LAST:event_JMI_AcceptFriendActionPerformed
 
@@ -891,7 +935,9 @@ public class MainExamenLab extends javax.swing.JFrame {
         modeloARBOL.reload();
         archivo = new File("./Usuarios");
         LoadFile();
-        Mensaje x = new Mensaje();
+        //listaUsuarios.get(numberLoggedIn).Enviar();
+        //ThreadMessage t = new Thread(this.jProgressBar1,)
+        ThreadMessage t = new ThreadMessage();
         
 
     }//GEN-LAST:event_JMI_SendMessageActionPerformed
@@ -900,38 +946,88 @@ public class MainExamenLab extends javax.swing.JFrame {
         // TODO add your handling code here:
         archivo = new File("./Usuarios");
         LoadFile();
-        Grupo x = new Grupo(this.JT_GroupName.getText(),listaUsuarios.get(numberLoggedIn));
-        
+        //Grupo x = new Grupo(JT_GroupName.getText(),listaUsuarios.get(numberLoggedIn));
+        DefaultTreeModel modeloARBOL
+                = (DefaultTreeModel) JTree_Receptores.getModel();
+        DefaultMutableTreeNode raiz
+                = (DefaultMutableTreeNode) modeloARBOL.getRoot();
+        int centinela = -1;
+        for (int i = 0; i < raiz.getChildCount(); i++) {
+            if (raiz.getChildAt(i).toString().
+                    equals(JT_GroupName.getText())) {
+                DefaultMutableTreeNode p
+                        = new DefaultMutableTreeNode(
+                                new Grupo(JT_GroupName.getText(), listaUsuarios.get(numberLoggedIn))
+                        );
+                ((DefaultMutableTreeNode) raiz.getChildAt(i)).add(p);
+                centinela = 1;
+            } //fin if
+        } //fin for  
+
+        if (centinela == -1) {
+            DefaultMutableTreeNode n
+                    = new DefaultMutableTreeNode(JT_GroupName.getText());
+            DefaultMutableTreeNode p
+                    = new DefaultMutableTreeNode(
+                            new Grupo(JT_GroupName.getText(), listaUsuarios.get(numberLoggedIn))
+                    );
+            n.add(p);
+            raiz.add(n);
+        }  // fin if          
+        modeloARBOL.reload();
+
     }//GEN-LAST:event_JB_CreateGroupActionPerformed
 
     private void JTree_ReceptoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JTree_ReceptoresMouseClicked
         // TODO add your handling code here:
-         if (evt.isMetaDown()) {
+        if (evt.isMetaDown()) {
             //seleccionar un nodo con click derecho
             int row = JTree_Receptores.getClosestRowForLocation(
                     evt.getX(), evt.getY());
             JTree_Receptores.setSelectionRow(row);
             Object v1
                     = JTree_Receptores.getSelectionPath().
-                    getLastPathComponent();
+                            getLastPathComponent();
 //            nodo_seleccionado = (DefaultMutableTreeNode) v1;
             if (nodo_seleccionado.getUserObject() instanceof Grupo) {
                 grupo_seleccionada
                         = (Grupo) nodo_seleccionado.
-                        getUserObject();
+                                getUserObject();
                 SeeMessageMenu.show(evt.getComponent(),
                         evt.getX(), evt.getY());
             }
             if (nodo_seleccionado.getUserObject() instanceof Usuarios) {
                 grupo_seleccionada
                         = (Grupo) nodo_seleccionado.
-                        getUserObject();
+                                getUserObject();
                 SeeMessageMenu.show(evt.getComponent(),
                         evt.getX(), evt.getY());
             }
 
         }
     }//GEN-LAST:event_JTree_ReceptoresMouseClicked
+
+    private void JB_Delete_CreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JB_Delete_CreateActionPerformed
+        // TODO add your handling code here:
+        archivo = new File("./Usuarios");
+        LoadFile();
+        listaUsuarios.remove(numberLoggedIn);
+        writeFile();
+        System.exit(0);
+    }//GEN-LAST:event_JB_Delete_CreateActionPerformed
+
+    private void JMI_SeeChatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMI_SeeChatActionPerformed
+        // TODO add your handling code here:
+        //TextArea_Chat.append();
+    }//GEN-LAST:event_JMI_SeeChatActionPerformed
+
+    private void JMI_RegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMI_RegistrarActionPerformed
+        // TODO add your handling code here:
+        JD_Registrar.setModal(true);
+        JD_Registrar.pack();
+        JD_Registrar.setLocationRelativeTo(this);
+        JD_Registrar.setVisible(true);
+    }//GEN-LAST:event_JMI_RegistrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1015,7 +1111,8 @@ public class MainExamenLab extends javax.swing.JFrame {
             ex.printStackTrace();
         }
     }
-    
+
+    String ToSolicitud = "";
     Grupo grupo_seleccionada;
     DefaultMutableTreeNode nodo_seleccionado;
     int numberLoggedIn = 0;
@@ -1028,6 +1125,7 @@ public class MainExamenLab extends javax.swing.JFrame {
     private javax.swing.JPopupMenu FriendRequestMenu;
     private javax.swing.JButton JB_CreateGroup;
     private javax.swing.JButton JB_CreateUsuario;
+    private javax.swing.JButton JB_Delete_Create;
     private javax.swing.JButton JB_ListFriends;
     private javax.swing.JButton JB_ListRequests;
     private javax.swing.JButton JB_Login_Login;
@@ -1061,6 +1159,7 @@ public class MainExamenLab extends javax.swing.JFrame {
     private javax.swing.JTextField JT_Usuario_Create;
     private javax.swing.JTextField JT_Usuario_Registrar;
     private javax.swing.JTree JTree_Receptores;
+    private javax.swing.JTabbedPane MAINTAB;
     private javax.swing.JMenuBar MainMenuBar;
     private javax.swing.JPanel MainPanel;
     private javax.swing.JPanel MainPanel_ListChat;
@@ -1100,10 +1199,10 @@ public class MainExamenLab extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTabbedPane jTabbedPane1;
     // End of variables declaration//GEN-END:variables
 }

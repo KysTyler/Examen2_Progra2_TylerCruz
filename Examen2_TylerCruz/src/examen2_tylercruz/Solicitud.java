@@ -1,8 +1,11 @@
 package examen2_tylercruz;
 
-public class Solicitud {
+import java.io.Serializable;
+
+public class Solicitud implements Serializable{
     private String sender;
     private Usuarios user;
+    private static final long SerialVersionUID=105L;
 
     public Solicitud() {
     }

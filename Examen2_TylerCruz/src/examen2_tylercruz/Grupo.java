@@ -1,11 +1,13 @@
 package examen2_tylercruz;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Grupo extends Chats{
+public class Grupo extends Chats implements Serializable{
     private String chatName;
     private ArrayList <Usuarios> listMiembros = new ArrayList();
     private Usuarios admin;
+    private static final long SerialVersionUID=101L;
 
     public Grupo() {
     }

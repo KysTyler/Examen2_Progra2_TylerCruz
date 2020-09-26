@@ -1,8 +1,10 @@
 package examen2_tylercruz;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Chats {
+public class Chats implements Serializable{
+    private static final long SerialVersionUID=100L;
     private ArrayList <Mensaje> listmsg = new ArrayList();
     public Chats() {
     }
